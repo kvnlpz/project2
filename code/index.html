@@ -1,0 +1,36 @@
+<!--Filename: index.html-->
+<!--Description: this HTML file serves as the index of the webpage and our UI-->
+<!--Authors: Kevin Lopez-->
+<!--cwid: 889508465-->
+<!--email: kevinlopez8554@csu.fullerton.edu-->
+
+<!--Emiliano Arranaga-->
+<!--email: earranaga1202@csu.fullerton.edu-->
+<!--cwid: 888006756-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Project 1</title>
+    <link href="../files/styles.css" rel="stylesheet">
+</head>
+<body><h1>Cella Ant 12 Project</h1>
+
+<canvas height="738" id="grid" width="738"></canvas>
+
+</body>
+<script src="../files/animator.js"></script>
+
+<script>
+    let canvas = document.getElementById("grid");
+    let context = canvas.getContext("2d");
+    let center = 369;
+    let moves = 1000;
+    let begState = 0;
+    let begDirection = 0; // North
+    let colors = ['black', 'red', 'yellow', 'blue', 'green'];
+    draw_grid(context, 41, 41, 'white');
+    drawTriangleNorth(context, center, center);
+    rotate(context, begState, begDirection, center, center, colors, moves);
+</script>
+</html>

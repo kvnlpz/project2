@@ -1,0 +1,23 @@
+/*Filename: styles.css*/
+/*Description: this is just the styles css file with our characteristics*/
+/*Authors: Kevin Lopez*/
+/*cwid: 889508465*/
+/*email: kevinlopez8554@csu.fullerton.edu*/
+
+/*Emiliano Arranaga*/
+/*email: earranaga1202@csu.fullerton.edu*/
+/*cwid: 888006756*/
+
+body {
+    text-align: center;
+    font-family: sans-serif;
+    background-color: #0D1317;
+}
+
+h1 {
+    color: white;
+}
+
+canvas {
+    background-color: black;
+}

@@ -12,25 +12,172 @@
 <html lang="en">
 <head>
     <title>Project 1</title>
-    <link href="../files/styles.css" rel="stylesheet">
-</head>
-<body><h1>Cella Ant 12 Project</h1>
 
-<canvas height="738" id="grid" width="738"></canvas>
+    <link href="../files/styles.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+<!--<script>-->
+<!--    // Box width-->
+<!--    var bw = 400;-->
+<!--    // Box height-->
+<!--    var bh = 400;-->
+<!--    // Padding-->
+<!--    var p = 10;-->
+
+<!--    var canvas = document.getElementById("canvas");-->
+<!--    var context = canvas.getContext("2d");-->
+<!--    function drawBoard(){-->
+<!--        for (var x = 0; x <= bw; x += 40) {-->
+<!--            context.moveTo(0.5 + x + p, p);-->
+<!--            context.lineTo(0.5 + x + p, bh + p);-->
+<!--        }-->
+
+<!--        for (var x = 0; x <= bh; x += 40) {-->
+<!--            context.moveTo(p, 0.5 + x + p);-->
+<!--            context.lineTo(bw + p, 0.5 + x + p);-->
+<!--        }-->
+<!--        context.strokeStyle = "white";-->
+<!--        context.stroke();-->
+<!--    }-->
+
+<!--    drawBoard();-->
+<!--</script>-->
+<h1>Project 2</h1>
+
+<div class="row">
+
+
+    <div class="column">
+        <!--        <h2>Algo 1</h2>-->
+        <!--        <p>Merge Sort</p>-->
+        <canvas id="first" class="canvasItem"></canvas>
+
+    </div>
+    <div class="column">
+        <!--        <h2>Algo 2</h2>-->
+        <!--        <p>Golds Sort</p>-->
+        <canvas id="second" class="canvasItem"></canvas>
+
+    </div>
+    <div class="column">
+        <!--        <h2>Algo 3</h2>-->
+        <!--        <p>Insertion Sort</p>-->
+        <canvas id="third" class="canvasItem"></canvas>
+
+    </div>
+    <div class="column">
+        <!--        <h2>Algo 4</h2>-->
+        <!--        <p>Quick Sort</p>-->
+        <canvas id="fourth" class="canvasItem"></canvas>
+
+    </div>
+
+</div>
+<!--<div class="row">-->
+<!--    <div class="column"></div>-->
+<!--    <div class="column"></div>-->
+<!--</div>-->
+<!--<canvas height="738" id="grid" width="738"></canvas>-->
 
 </body>
-<script src="../files/animator.js"></script>
 
+
+<!--<script src="../files/animator.js"></script>-->
+
+<!--<script>-->
+<!--    let canvas = document.getElementById("grid");-->
+<!--    let context = canvas.getContext("2d");-->
+<!--    let center = 369;-->
+<!--    let moves = 1000;-->
+<!--    let begState = 0;-->
+<!--    let begDirection = 0; // North-->
+<!--    let colors = ['black', 'red', 'yellow', 'blue', 'green'];-->
+<!--    draw_grid(context, 41, 41, 'white');-->
+
+
+<!--    // drawTriangleNorth(context, center, center);-->
+<!--    // rotate(context, begState, begDirection, center, center, colors, moves);-->
+<!--</script>-->
 <script>
-    let canvas = document.getElementById("grid");
-    let context = canvas.getContext("2d");
-    let center = 369;
-    let moves = 1000;
-    let begState = 0;
-    let begDirection = 0; // North
-    let colors = ['black', 'red', 'yellow', 'blue', 'green'];
-    draw_grid(context, 41, 41, 'white');
-    drawTriangleNorth(context, center, center);
-    rotate(context, begState, begDirection, center, center, colors, moves);
+
+    // var drawGrid = function (w, h, id) {
+    // var canvas = document.getElementById(id);
+    // canvas.attr({width: cw, height: ch}).appendTo('body');
+    // var canvas = $('<canvas/>').attr({width: cw, height: ch}).appendTo('body');
+    // var ctx = canvas.getContext('2d');
+    // ctx.strokeStyle = "white";
+    // ctx.lineWidth = 5;
+    //
+    // ctx.canvas.width = canvas.width;
+    // ctx.canvas.height = canvas.height;
+    //
+    //
+    // var columns = 1,
+    //     rows    = 42;
+    // var bw = canvas.width/columns;
+    // var bh = canvas.height/rows;
+    // var p = 0;
+
+
+    //draws a grid
+    function draw_grid(ctxz, min, maj, stroke_) {
+        // ctxz.save();
+        //setting the grid size
+        let width = ctxz.canvas.width;
+        let height = ctxz.canvas.height;
+
+        // var width = canvasOne.getAttribute('width');
+        // var height = canvasOne.getAttribute('height');
+
+        for (let ix = 0; ix < width; ix += width / min) {
+            ctxz.beginPath();
+            ctxz.moveTo(ix, 0);
+            ctxz.lineTo(ix, height);
+            ctxz.strokeStyle = stroke_;
+            ctxz.lineWidth = 0.9;
+            ctxz.stroke();
+        }
+        for (let iy = 0; iy < height; iy += height / maj) {
+            ctxz.beginPath();
+            ctxz.moveTo(0, iy);
+            ctxz.lineTo(width, iy);
+            ctxz.strokeStyle = stroke_;
+            ctxz.lineWidth = 0.9;
+            ctxz.stroke();
+        }
+        // ctxz.restore();
+    }
+
+    let canvasOne = document.getElementById("first");
+    let contx1 = canvasOne.getContext("2d");
+
+    let canvasTwo = document.getElementById("second");
+    let contx2 = canvasTwo.getContext("2d");
+
+    let canvasThree = document.getElementById("third");
+    let contx3 = canvasThree.getContext("2d");
+
+    let canvasFour = document.getElementById("fourth");
+    let contx4 = canvasFour.getContext("2d");
+
+    // var width = canvasOne.getAttribute('height');
+    // var height = canvasOne.getAttribute('width');
+    draw_grid(contx1, 1, 42, 'red');
+    draw_grid(contx2, 1, 42, 'green');
+
+    draw_grid(contx3, 1, 42, 'purple');
+
+    draw_grid(contx4, 1, 42, 'yellow');
+
+    // drawGrid(canvasOne.width, canvasOne.height, 'first');
+    // drawGrid(canvasOne.width, canvasOne.height, 'second');
+    // drawGrid(canvasOne.width, canvasOne.height, 'third');
+    // drawGrid(canvasOne.width, canvasOne.height, 'fourth');
+
+
 </script>
 </html>

@@ -48,34 +48,19 @@
 <!--</script>-->
 <h1>Project 2</h1>
 
-<div class="row">
-
-
-    <div class="column">
-        <!--        <h2>Algo 1</h2>-->
-        <!--        <p>Merge Sort</p>-->
-        <canvas id="first" class="canvasItem"></canvas>
-
+<div id="columnContainer" class="row">
+    <div id="diveOne" class="column">
+        <canvas id="first"  class="canvasItem"></canvas>
     </div>
-    <div class="column">
-        <!--        <h2>Algo 2</h2>-->
-        <!--        <p>Golds Sort</p>-->
-        <canvas id="second" class="canvasItem"></canvas>
-
+    <div id="diveTwo" class="column">
+        <canvas id="second"   class="canvasItem"></canvas>
     </div>
-    <div class="column">
-        <!--        <h2>Algo 3</h2>-->
-        <!--        <p>Insertion Sort</p>-->
-        <canvas id="third" class="canvasItem"></canvas>
-
+    <div id="diveThree"  class="column">
+        <canvas id="third"   class="canvasItem"></canvas>
     </div>
-    <div class="column">
-        <!--        <h2>Algo 4</h2>-->
-        <!--        <p>Quick Sort</p>-->
+    <div  id="diveFour" class="column">
         <canvas id="fourth" class="canvasItem"></canvas>
-
     </div>
-
 </div>
 <!--<div class="row">-->
 <!--    <div class="column"></div>-->
@@ -124,11 +109,22 @@
 
 
     //draws a grid
-    function draw_grid(ctxz, min, maj, stroke_) {
+    function draw_grid(ctxz, min, maj, stroke_, name) {
         // ctxz.save();
         //setting the grid size
         let width = ctxz.canvas.width;
         let height = ctxz.canvas.height;
+
+        // var scale = window.devicePixelRatio;
+        //
+        //
+        // ctxz.width = Math.floor(ctxz.canvas.width * scale);
+        // ctxz.height = Math.floor(ctxz.canvas.width * scale);
+
+
+        let textX = width/2;
+        let texty = height/2;
+        let n = name;
 
         // var width = canvasOne.getAttribute('width');
         // var height = canvasOne.getAttribute('height');
@@ -138,7 +134,7 @@
             ctxz.moveTo(ix, 0);
             ctxz.lineTo(ix, height);
             ctxz.strokeStyle = stroke_;
-            ctxz.lineWidth = 0.9;
+            ctxz.lineWidth = 1;
             ctxz.stroke();
         }
         for (let iy = 0; iy < height; iy += height / maj) {
@@ -146,32 +142,56 @@
             ctxz.moveTo(0, iy);
             ctxz.lineTo(width, iy);
             ctxz.strokeStyle = stroke_;
-            ctxz.lineWidth = 0.9;
+            ctxz.lineWidth = 1;
             ctxz.stroke();
         }
         // ctxz.restore();
+        // ctxz.moveTo(0, 0);
+        ctxz.font = '10px Arial';
+        ctxz.fillStyle = "white";
+        ctxz.textAlign = "center";
+        ctxz.textBaseline = "middle";
+
+        ctxz.fillText(name, textX, 10);
+
     }
 
     let canvasOne = document.getElementById("first");
+    var parent = document.getElementById("diveOne");
+    canvasOne.width = parent.offsetWidth;
+    canvasOne.height = parent.offsetHeight;
     let contx1 = canvasOne.getContext("2d");
+    // canvasOne.getContext('2d').scale(1,1);
+    // var scale = window.devicePixelRatio;
+    // contx1.scale(scale, scale);
 
     let canvasTwo = document.getElementById("second");
+    var parentTwo = document.getElementById("diveTwo");
+    canvasTwo.width = parentTwo.offsetWidth;
+    canvasTwo.height = parentTwo.offsetHeight;
     let contx2 = canvasTwo.getContext("2d");
 
     let canvasThree = document.getElementById("third");
+    var parentThree = document.getElementById("diveThree");
+    canvasThree.width = parentThree.offsetWidth;
+    canvasThree.height = parentThree.offsetHeight;
+    // canvasThree.width = parent.offsetWidth;
+    // canvasThree.height = parent.offsetHeight;
     let contx3 = canvasThree.getContext("2d");
 
     let canvasFour = document.getElementById("fourth");
+    var parentFour = document.getElementById("diveFour");
+    canvasFour.width = parentFour.offsetWidth;
+    canvasFour.height = parentFour.offsetHeight;
+    // canvasFour.width = parent.offsetWidth;
+    // canvasFour.height = parent.offsetHeight;
     let contx4 = canvasFour.getContext("2d");
-
     // var width = canvasOne.getAttribute('height');
     // var height = canvasOne.getAttribute('width');
-    draw_grid(contx1, 1, 42, 'red');
-    draw_grid(contx2, 1, 42, 'green');
-
-    draw_grid(contx3, 1, 42, 'purple');
-
-    draw_grid(contx4, 1, 42, 'yellow');
+    draw_grid(contx1, 1, 42, 'white', "MergeSort");
+    draw_grid(contx2, 1, 42, 'white', "QuickSort");
+    draw_grid(contx3, 1, 42, 'white', "Gold Sort");
+    draw_grid(contx4, 1, 42, 'white', "Insertion Sort");
 
     // drawGrid(canvasOne.width, canvasOne.height, 'first');
     // drawGrid(canvasOne.width, canvasOne.height, 'second');

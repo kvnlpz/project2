@@ -42,7 +42,7 @@ body {
 /* Clear floats after the columns */
 .row:after {
 
-    height: 100%;
+    /*height: 100%;*/
     content: "";
     display: table;
     clear: both;
@@ -52,8 +52,8 @@ body {
 
 .canvasItem{
     background-color: blue;
-    width: 100%;
-    height: 100%;
+    /*width: 100%;*/
+    /*height: 100%;*/
 }
 h1 {
     color: white;

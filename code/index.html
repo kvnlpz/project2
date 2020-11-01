@@ -91,6 +91,8 @@
 
     var colOneList = [];
     var colTwoList = [];
+    var colThreeList = [];
+    var colFourList = [];
 
 
 
@@ -108,6 +110,12 @@
                 }
                 if(colTwoList[x] != null){
                     contx3.fillText(colTwoList[x], nWidth, yvalue);
+                }
+                if(colThreeList[x] != null){
+                    contx2.fillText(colThreeList[x], nWidth, yvalue);
+                }
+                if(colFourList[x] != null){
+                    contx4.fillText(colFourList[x], nWidth, yvalue);
                 }
                 await sleep(500);
         }
@@ -212,9 +220,9 @@
     // var width = canvasOne.getAttribute('height');
     // var height = canvasOne.getAttribute('width');
     draw_grid(contx1, 1, 42, 'white', "MergeSort");
-    draw_grid(contx2, 1, 42, 'white', "QuickSort");
+    draw_grid(contx2, 1, 42, 'white', "Insertion Sort");
     draw_grid(contx3, 1, 42, 'white', "Gold Sort");
-    draw_grid(contx4, 1, 42, 'white', "Insertion Sort");
+    draw_grid(contx4, 1, 42, 'white', "QuickSort");
 
 
     //canvas 1
@@ -241,6 +249,12 @@
     evenOddSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25]);
     // colTwoList.push([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString());
     colTwoList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
+    //
+    insertionSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25]);
+    colThreeList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
+    //
+    quickSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25]);
+    colFourList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
 
     printLists();
 
@@ -328,7 +342,57 @@
             colTwoList.push((evens + " : " + odds).toString());
         }
     }
+    function insertionSort(insertionArray){
+        for(let i = 1; i < insertionArray.length; i++){
 
+            for(let j = i; j> 0; j--){
+                if (insertionArray[j] < insertionArray[j - 1]) {
+                    const temp = insertionArray[j];
+                    insertionArray[j] = insertionArray[j - 1];
+                    insertionArray[j - 1] = temp;
+                }
+                else
+                    break;
+
+                colThreeList.push((insertionArray).toString());
+
+            }
+
+        }
+
+    }
+
+    function quickSort(quickArray){
+        if(quickArray.length  <= 1){
+            return quickArray;
+        }
+
+        const pivot = quickArray[quickArray.length - 1];
+        const left = [];
+        const right = [];
+
+        for (let i = 0; i < quickArray.length - 1; i++) {
+            if(quickArray[i] < pivot){
+                left.push(quickArray[i])
+            }
+            else{
+                right.push(quickArray[i]);
+            }
+
+        }
+
+        if (left.length > 0 && right.length > 0){
+            return[...quickSort(left), pivot, ...quickSort(right)];
+        }
+        else if (left.length > 0){
+            return [...quickSort(left), pivot];
+        }
+        else{
+            return [pivot, ...quickSort(right)];
+
+        }
+        
+    }
 
 </script>
 </html>

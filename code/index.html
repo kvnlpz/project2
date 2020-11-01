@@ -48,18 +48,18 @@
 <!--</script>-->
 <h1>Project 2</h1>
 
-<div id="columnContainer" class="row">
-    <div id="diveOne" class="column">
-        <canvas id="first" class="canvasItem"></canvas>
+<div class="row" id="columnContainer">
+    <div class="column" id="diveOne">
+        <canvas class="canvasItem" id="first"></canvas>
     </div>
-    <div id="diveTwo" class="column">
-        <canvas id="second" class="canvasItem"></canvas>
+    <div class="column" id="diveTwo">
+        <canvas class="canvasItem" id="second"></canvas>
     </div>
-    <div id="diveThree" class="column">
-        <canvas id="third" class="canvasItem"></canvas>
+    <div class="column" id="diveThree">
+        <canvas class="canvasItem" id="third"></canvas>
     </div>
-    <div id="diveFour" class="column">
-        <canvas id="fourth" class="canvasItem"></canvas>
+    <div class="column" id="diveFour">
+        <canvas class="canvasItem" id="fourth"></canvas>
     </div>
 </div>
 <!--<div class="row">-->
@@ -95,8 +95,8 @@
     var colFourList = [];
 
 
-    function convertBackToHex(arrayToConvert){
-        for (var item in arrayToConvert){
+    function convertBackToHex(arrayToConvert) {
+        for (var item in arrayToConvert) {
             hexValue = arrayToConvert[item].toString(16);
             arrayToConvert[item] = hexValue;
         }
@@ -106,27 +106,28 @@
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    async function printLists(){
+    async function printLists() {
         var heightIncrement = contx1.canvas.height / 42;
         var yvalue = 10;
-        for(var x = 0; x < 42; x++){
+        for (var x = 0; x < 42; x++) {
             yvalue += heightIncrement;
-                if(colOneList[x] != null){
-                    contx1.fillText(colOneList[x], nWidth, yvalue);
-                }
-                if(colTwoList[x] != null){
-                    contx3.fillText(colTwoList[x], nWidth, yvalue);
-                }
-                if(colThreeList[x] != null){
-                    contx2.fillText(colThreeList[x], nWidth, yvalue);
-                }
-                if(colFourList[x] != null){
-                    contx4.fillText(colFourList[x], nWidth, yvalue);
-                }
-                await sleep(500);
+            if (colOneList[x] != null) {
+                contx1.fillText(colOneList[x], nWidth, yvalue);
+            }
+            if (colTwoList[x] != null) {
+                contx3.fillText(colTwoList[x], nWidth, yvalue);
+            }
+            if (colThreeList[x] != null) {
+                contx2.fillText(colThreeList[x], nWidth, yvalue);
+            }
+            if (colFourList[x] != null) {
+                contx4.fillText(colFourList[x], nWidth, yvalue);
+            }
+            await sleep(500);
         }
 
     }
+
     // var drawGrid = function (w, h, id) {
     // var canvas = document.getElementById(id);
     // canvas.attr({width: cw, height: ch}).appendTo('body');
@@ -236,9 +237,8 @@
     contx1.fillStyle = "white";
     contx1.textAlign = "center";
     contx1.textBaseline = "middle";
-    let nWidth =  contx1.canvas.width / 2;
+    let nWidth = contx1.canvas.width / 2;
     var count = 0;
-
 
 
     contx3.font = '15px Arial';
@@ -250,7 +250,7 @@
 
 
     // 5F7D8A1593B47B8
-    var myArray = [5, 'F', 7, 'D' ,8, 'A', 1, 5, 9, 3, 'B', 4, 7, 'B', 8];
+    var myArray = [5, 'F', 7, 'D', 8, 'A', 1, 5, 9, 3, 'B', 4, 7, 'B', 8];
     var originalArray = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25];
 
     // colOneList.push([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString());
@@ -265,8 +265,8 @@
     quickSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25]);
     colFourList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
 
-    function convertToDecimal(ArrToDecimal){
-        for(var index in ArrToDecimal){
+    function convertToDecimal(ArrToDecimal) {
+        for (var index in ArrToDecimal) {
             var newNumber = parseInt(ArrToDecimal[index].toString(), 16);
             ArrToDecimal[index] = newNumber;
         }
@@ -292,7 +292,7 @@
     //converting from hex to decimal
 
 
-    function mergeSort (unsortedArray) {
+    function mergeSort(unsortedArray) {
 
 
         // No need to sort the array if the array only has one element or empty
@@ -316,7 +316,7 @@
     }
 
     // Merge the two arrays: left and right
-    function merge (left, right) {
+    function merge(left, right) {
         // count++;
         // contx1.fillText(left + " - " + right, nWidth, 30*count);
 
@@ -347,19 +347,15 @@
     }
 
 
-
-
-
-    function evenOddSort(inputArray){
+    function evenOddSort(inputArray) {
         var count3 = 0;
         var evens = [];
         var odds = [];
         var result = [];
-        for(var i in inputArray){
-            if(inputArray[i]%2 == 0){
+        for (var i in inputArray) {
+            if (inputArray[i] % 2 == 0) {
                 evens.push(inputArray[i]);
-            }
-            else {
+            } else {
                 odds.push(inputArray[i]);
             }
             // count3++;
@@ -373,17 +369,15 @@
     }
 
 
+    function insertionSort(insertionArray) {
+        for (let i = 1; i < insertionArray.length; i++) {
 
-    function insertionSort(insertionArray){
-        for(let i = 1; i < insertionArray.length; i++){
-
-            for(let j = i; j> 0; j--){
+            for (let j = i; j > 0; j--) {
                 if (insertionArray[j] < insertionArray[j - 1]) {
                     const temp = insertionArray[j];
                     insertionArray[j] = insertionArray[j - 1];
                     insertionArray[j - 1] = temp;
-                }
-                else
+                } else
                     break;
 
                 colThreeList.push((insertionArray).toString());
@@ -394,8 +388,8 @@
 
     }
 
-    function quickSort(quickArray){
-        if(quickArray.length  <= 1){
+    function quickSort(quickArray) {
+        if (quickArray.length <= 1) {
             return quickArray;
         }
 
@@ -404,26 +398,23 @@
         const right = [];
 
         for (let i = 0; i < quickArray.length - 1; i++) {
-            if(quickArray[i] < pivot){
+            if (quickArray[i] < pivot) {
                 left.push(quickArray[i])
-            }
-            else{
+            } else {
                 right.push(quickArray[i]);
             }
 
         }
 
-        if (left.length > 0 && right.length > 0){
-            return[...quickSort(left), pivot, ...quickSort(right)];
-        }
-        else if (left.length > 0){
+        if (left.length > 0 && right.length > 0) {
+            return [...quickSort(left), pivot, ...quickSort(right)];
+        } else if (left.length > 0) {
             return [...quickSort(left), pivot];
-        }
-        else{
+        } else {
             return [pivot, ...quickSort(right)];
 
         }
-        
+
     }
 
 </script>

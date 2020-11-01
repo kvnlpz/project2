@@ -89,6 +89,30 @@
 <!--</script>-->
 <script>
 
+    var colOneList = [];
+    var colTwoList = [];
+
+
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function printLists(){
+        var heightIncrement = contx1.canvas.height / 42;
+        var yvalue = 10;
+        for(var x = 0; x < 42; x++){
+            yvalue += heightIncrement;
+                if(colOneList[x] != null){
+                    contx1.fillText(colOneList[x], nWidth, yvalue);
+                }
+                if(colTwoList[x] != null){
+                    contx3.fillText(colTwoList[x], nWidth, yvalue);
+                }
+                await sleep(500);
+        }
+
+    }
     // var drawGrid = function (w, h, id) {
     // var canvas = document.getElementById(id);
     // canvas.attr({width: cw, height: ch}).appendTo('body');
@@ -134,7 +158,7 @@
             ctxz.moveTo(ix, 0);
             ctxz.lineTo(ix, height);
             ctxz.strokeStyle = stroke_;
-            ctxz.lineWidth = 1;
+            ctxz.lineWidth = 2;
             ctxz.stroke();
         }
         for (let iy = 0; iy < height; iy += height / maj) {
@@ -142,12 +166,12 @@
             ctxz.moveTo(0, iy);
             ctxz.lineTo(width, iy);
             ctxz.strokeStyle = stroke_;
-            ctxz.lineWidth = 1;
+            ctxz.lineWidth = 2;
             ctxz.stroke();
         }
         // ctxz.restore();
         // ctxz.moveTo(0, 0);
-        ctxz.font = '10px Arial';
+        ctxz.font = '15px Arial';
         ctxz.fillStyle = "white";
         ctxz.textAlign = "center";
         ctxz.textBaseline = "middle";
@@ -192,14 +216,34 @@
     draw_grid(contx3, 1, 42, 'white', "Gold Sort");
     draw_grid(contx4, 1, 42, 'white', "Insertion Sort");
 
-    contx1.font = '10px Arial';
+
+    //canvas 1
+    contx1.font = '15px Arial';
     contx1.fillStyle = "white";
     contx1.textAlign = "center";
     contx1.textBaseline = "middle";
     let nWidth =  contx1.canvas.width / 2;
     var count = 0;
 
-    mergeSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25])
+
+
+    contx3.font = '15px Arial';
+    contx3.fillStyle = "white";
+    contx3.textAlign = "center";
+    contx3.textBaseline = "middle";
+    // let nWidth =  contx3.canvas.width / 2;
+    // var count = 0;
+
+
+    mergeSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25]);
+    // colOneList.push([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString());
+    colOneList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
+    evenOddSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25]);
+    // colTwoList.push([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString());
+    colTwoList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
+
+    printLists();
+
     // contx1.fillText(mergeSort([5, 6, 4, 3, 10, 8, 1]), nWidth, 30);
 
     // drawGrid(canvasOne.width, canvasOne.height, 'first');
@@ -252,9 +296,10 @@
         }
 
         var printArray = resultArray.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
-        count++;
+        // count++;
         // contx1.fillText(" " + left + " " + " " + right, nWidth, 30*count);
-        contx1.fillText(printArray, nWidth, 30*count);
+        // contx1.fillText(printArray, nWidth, 30*count);
+        colOneList.push(printArray.toString());
         //
         // We need to concat to the resultArray because there will be one element left over after the while loop
         return resultArray
@@ -263,6 +308,26 @@
     }
 
 
+
+
+
+    function evenOddSort(inputArray){
+        var count3 = 0;
+        var evens = [];
+        var odds = [];
+        var result = [];
+        for(var i in inputArray){
+            if(inputArray[i]%2 == 0){
+                evens.push(inputArray[i]);
+            }
+            else {
+                odds.push(inputArray[i]);
+            }
+            // count3++;
+            // contx3.fillText(result + "   "  +    evens + " : " + odds, nWidth, 30*count3);
+            colTwoList.push((evens + " : " + odds).toString());
+        }
+    }
 
 
 </script>

@@ -95,6 +95,12 @@
     var colFourList = [];
 
 
+    function convertBackToHex(arrayToConvert){
+        for (var item in arrayToConvert){
+            hexValue = arrayToConvert[item].toString(16);
+            arrayToConvert[item] = hexValue;
+        }
+    }
 
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
@@ -243,12 +249,15 @@
     // var count = 0;
 
 
-    mergeSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25]);
+    // 5F7D8A1593B47B8
+    var myArray = [5, 'F', 7, 'D' ,8, 'A', 1, 5, 9, 3, 'B', 4, 7, 'B', 8];
+    var originalArray = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25];
+
     // colOneList.push([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString());
-    colOneList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
-    evenOddSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25]);
+    colOneList[0] = myArray.toString();
     // colTwoList.push([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString());
-    colTwoList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
+    colTwoList[0] = myArray.toString();
+
     //
     insertionSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25]);
     colThreeList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
@@ -256,6 +265,17 @@
     quickSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25]);
     colFourList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
 
+    function convertToDecimal(ArrToDecimal){
+        for(var index in ArrToDecimal){
+            var newNumber = parseInt(ArrToDecimal[index].toString(), 16);
+            ArrToDecimal[index] = newNumber;
+        }
+    }
+
+
+    convertToDecimal(myArray);
+    mergeSort(myArray);
+    evenOddSort(myArray);
     printLists();
 
     // contx1.fillText(mergeSort([5, 6, 4, 3, 10, 8, 1]), nWidth, 30);
@@ -267,6 +287,10 @@
 
 
     // contx1.fillText([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString(), nWidth, 21);
+
+
+    //converting from hex to decimal
+
 
     function mergeSort (unsortedArray) {
 
@@ -298,7 +322,7 @@
 
         let resultArray = [], leftIndex = 0, rightIndex = 0;
 
-        // We will concatenate values into the resultArray in order
+        // We will add values into the resultArray in order
         while (leftIndex < left.length && rightIndex < right.length) {
             if (left[leftIndex] < right[rightIndex]) {
                 resultArray.push(left[leftIndex]);
@@ -313,6 +337,7 @@
         // count++;
         // contx1.fillText(" " + left + " " + " " + right, nWidth, 30*count);
         // contx1.fillText(printArray, nWidth, 30*count);
+        convertBackToHex(printArray);
         colOneList.push(printArray.toString());
         //
         // We need to concat to the resultArray because there will be one element left over after the while loop
@@ -339,9 +364,16 @@
             }
             // count3++;
             // contx3.fillText(result + "   "  +    evens + " : " + odds, nWidth, 30*count3);
-            colTwoList.push((evens + " : " + odds).toString());
+            convertBackToHex(evens);
+            convertBackToHex(odds);
+            colTwoList.push((evens + "  ".repeat(6) + odds).toString());
+            convertToDecimal(evens);
+            convertToDecimal(odds);
         }
     }
+
+
+
     function insertionSort(insertionArray){
         for(let i = 1; i < insertionArray.length; i++){
 

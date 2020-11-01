@@ -91,7 +91,7 @@
 
     var colOneList = [];
     var colTwoList = [];
-
+    var colThreeList = [];
 
 
     function sleep(ms) {
@@ -108,6 +108,9 @@
                 }
                 if(colTwoList[x] != null){
                     contx3.fillText(colTwoList[x], nWidth, yvalue);
+                }
+                if(colThreeList[x] != null){
+                    contx2.fillText(colThreeList[x], nWidth, yvalue);
                 }
                 await sleep(500);
         }
@@ -327,6 +330,22 @@
             // contx3.fillText(result + "   "  +    evens + " : " + odds, nWidth, 30*count3);
             colTwoList.push((evens + " : " + odds).toString());
         }
+    }
+    
+    function insertionSort(array) {
+    for (let i = i; i < array.length; i++) {
+
+        for (let j = i; j > 0; j--) {
+            if (array[j] < array[j - 1]) {
+                const temp = array[j];
+                array[j] = array[j - 1];
+                array[j - 1] = temp;
+            }
+            else
+                break;
+            
+        }
+        colThreeList.push((array).toString());
     }
 
 

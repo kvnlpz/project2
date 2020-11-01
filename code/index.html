@@ -50,15 +50,15 @@
 
 <div id="columnContainer" class="row">
     <div id="diveOne" class="column">
-        <canvas id="first"  class="canvasItem"></canvas>
+        <canvas id="first" class="canvasItem"></canvas>
     </div>
     <div id="diveTwo" class="column">
-        <canvas id="second"   class="canvasItem"></canvas>
+        <canvas id="second" class="canvasItem"></canvas>
     </div>
-    <div id="diveThree"  class="column">
-        <canvas id="third"   class="canvasItem"></canvas>
+    <div id="diveThree" class="column">
+        <canvas id="third" class="canvasItem"></canvas>
     </div>
-    <div  id="diveFour" class="column">
+    <div id="diveFour" class="column">
         <canvas id="fourth" class="canvasItem"></canvas>
     </div>
 </div>
@@ -122,8 +122,8 @@
         // ctxz.height = Math.floor(ctxz.canvas.width * scale);
 
 
-        let textX = width/2;
-        let texty = height/2;
+        let textX = width / 2;
+        let texty = height / 2;
         let n = name;
 
         // var width = canvasOne.getAttribute('width');
@@ -151,7 +151,6 @@
         ctxz.fillStyle = "white";
         ctxz.textAlign = "center";
         ctxz.textBaseline = "middle";
-
         ctxz.fillText(name, textX, 10);
 
     }
@@ -193,10 +192,77 @@
     draw_grid(contx3, 1, 42, 'white', "Gold Sort");
     draw_grid(contx4, 1, 42, 'white', "Insertion Sort");
 
+    contx1.font = '10px Arial';
+    contx1.fillStyle = "white";
+    contx1.textAlign = "center";
+    contx1.textBaseline = "middle";
+    let nWidth =  contx1.canvas.width / 2;
+    var count = 0;
+
+    mergeSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25])
+    // contx1.fillText(mergeSort([5, 6, 4, 3, 10, 8, 1]), nWidth, 30);
+
     // drawGrid(canvasOne.width, canvasOne.height, 'first');
     // drawGrid(canvasOne.width, canvasOne.height, 'second');
     // drawGrid(canvasOne.width, canvasOne.height, 'third');
     // drawGrid(canvasOne.width, canvasOne.height, 'fourth');
+
+
+    // contx1.fillText([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString(), nWidth, 21);
+
+    function mergeSort (unsortedArray) {
+
+
+        // No need to sort the array if the array only has one element or empty
+        if (unsortedArray.length <= 1) {
+            return unsortedArray;
+        }
+
+
+        // In order to divide the array in half, we need to figure out the middle
+        const middle = Math.floor(unsortedArray.length / 2);
+
+        // This is where we will be dividing the array into left and right
+        const left = unsortedArray.slice(0, middle);
+        const right = unsortedArray.slice(middle);
+
+
+        // Using recursion to combine the left and right
+        return merge(
+            mergeSort(left), mergeSort(right)
+        );
+    }
+
+    // Merge the two arrays: left and right
+    function merge (left, right) {
+        // count++;
+        // contx1.fillText(left + " - " + right, nWidth, 30*count);
+
+        let resultArray = [], leftIndex = 0, rightIndex = 0;
+
+        // We will concatenate values into the resultArray in order
+        while (leftIndex < left.length && rightIndex < right.length) {
+            if (left[leftIndex] < right[rightIndex]) {
+                resultArray.push(left[leftIndex]);
+                leftIndex++; // move left array cursor
+            } else {
+                resultArray.push(right[rightIndex]);
+                rightIndex++; // move right array cursor
+            }
+        }
+
+        var printArray = resultArray.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
+        count++;
+        // contx1.fillText(" " + left + " " + " " + right, nWidth, 30*count);
+        contx1.fillText(printArray, nWidth, 30*count);
+        //
+        // We need to concat to the resultArray because there will be one element left over after the while loop
+        return resultArray
+            .concat(left.slice(leftIndex))
+            .concat(right.slice(rightIndex));
+    }
+
+
 
 
 </script>

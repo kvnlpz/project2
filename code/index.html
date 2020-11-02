@@ -72,10 +72,115 @@
 
 <script>
 
+    var isMergeSortFinished = false;
+    var isGoldSortFinished = false;
+    var allFunctionsFinished = false;
     var colOneList = [];
     var colTwoList = [];
     var colThreeList = [];
     var colFourList = [];
+    var goldsArray = [];
+    var mergeArray = [];
+
+
+    let canvasOne = document.getElementById("first");
+    var parent = document.getElementById("diveOne");
+    canvasOne.width = parent.offsetWidth;
+    canvasOne.height = parent.offsetHeight;
+    let contx1 = canvasOne.getContext("2d");
+
+    let canvasTwo = document.getElementById("second");
+    var parentTwo = document.getElementById("diveTwo");
+    canvasTwo.width = parentTwo.offsetWidth;
+    canvasTwo.height = parentTwo.offsetHeight;
+    let contx2 = canvasTwo.getContext("2d");
+
+    let canvasThree = document.getElementById("third");
+    var parentThree = document.getElementById("diveThree");
+    canvasThree.width = parentThree.offsetWidth;
+    canvasThree.height = parentThree.offsetHeight;
+    let contx3 = canvasThree.getContext("2d");
+
+    let canvasFour = document.getElementById("fourth");
+    var parentFour = document.getElementById("diveFour");
+    canvasFour.width = parentFour.offsetWidth;
+    canvasFour.height = parentFour.offsetHeight;
+    let contx4 = canvasFour.getContext("2d");
+
+    draw_grid(contx1, 1, 42, 'white', "MergeSort");
+    draw_grid(contx2, 1, 42, 'white', "Insertion Sort");
+    draw_grid(contx3, 1, 42, 'white', "Gold Sort");
+    draw_grid(contx4, 1, 42, 'white', "QuickSort");
+
+
+    //canvas 1
+    contx1.font = '15px Arial';
+    contx1.fillStyle = "white";
+    contx1.textAlign = "center";
+    contx1.textBaseline = "middle";
+    let nWidth = contx1.canvas.width / 2;
+    var count = 0;
+
+
+    contx3.font = '15px Arial';
+    contx3.fillStyle = "white";
+    contx3.textAlign = "center";
+    contx3.textBaseline = "middle";
+
+    var heightIncrement = contx1.canvas.height / 42;
+    var yvalue = 10;
+
+
+    var myArray = [5, 'F', 7, 'D', 8, 'A', 1, 5, 9, 3, 'B', 4, 7, 'B', 8];
+    var originalArray = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25];
+    // colOneList[0] = myArray.toString();
+    // colTwoList[0] = myArray.toString();
+    colThreeList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
+    colFourList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
+
+
+
+    insertionSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25]);
+    quickSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25]);
+    convertToDecimal(myArray);
+    // mergeSort(myArray);
+    // evenOddSort(myArray);
+    runAllFunctions(); // function that starts the program!
+
+    async function printLine(){
+       // await sleep(5000);
+        console.log("function printlnie()"); //the logs are just for me
+        yvalue+=heightIncrement;
+        console.log("y value"+ yvalue);
+        console.log("nwidth: "+ nWidth);
+        console.log(colOneList.toString());
+        // console.log(colTwoList.toString());
+        contx1.fillText(colOneList.toString(), nWidth, yvalue);
+        // contx3.fillText(colTwoList.toString(), nWidth, yvalue);
+
+
+    }
+
+
+
+    async function runAllFunctions(){
+        mergeSort(myArray); //run them once to start
+        evenOddSort(myArray);
+        for(var c = 0; c < 46; c++){
+            console.log("sleeping");
+            await sleep(500); //make it wait half a second
+
+            // this conditional will have to include the other 2 algorithms too, but the same concept applies
+
+            if(isMergeSortFinished && isGoldSortFinished){
+                //if theyre done we can print the first line
+                printLine(); //prints
+                mergeSort(mergeArray); //continues to the next step
+                evenOddSort(goldsArray);
+            }
+        }
+    }
+
 
 
     function convertBackToHex(arrayToConvert) {
@@ -149,60 +254,6 @@
 
     }
 
-    let canvasOne = document.getElementById("first");
-    var parent = document.getElementById("diveOne");
-    canvasOne.width = parent.offsetWidth;
-    canvasOne.height = parent.offsetHeight;
-    let contx1 = canvasOne.getContext("2d");
-
-    let canvasTwo = document.getElementById("second");
-    var parentTwo = document.getElementById("diveTwo");
-    canvasTwo.width = parentTwo.offsetWidth;
-    canvasTwo.height = parentTwo.offsetHeight;
-    let contx2 = canvasTwo.getContext("2d");
-
-    let canvasThree = document.getElementById("third");
-    var parentThree = document.getElementById("diveThree");
-    canvasThree.width = parentThree.offsetWidth;
-    canvasThree.height = parentThree.offsetHeight;
-    let contx3 = canvasThree.getContext("2d");
-
-    let canvasFour = document.getElementById("fourth");
-    var parentFour = document.getElementById("diveFour");
-    canvasFour.width = parentFour.offsetWidth;
-    canvasFour.height = parentFour.offsetHeight;
-    let contx4 = canvasFour.getContext("2d");
-
-    draw_grid(contx1, 1, 42, 'white', "MergeSort");
-    draw_grid(contx2, 1, 42, 'white', "Insertion Sort");
-    draw_grid(contx3, 1, 42, 'white', "Gold Sort");
-    draw_grid(contx4, 1, 42, 'white', "QuickSort");
-
-
-    //canvas 1
-    contx1.font = '15px Arial';
-    contx1.fillStyle = "white";
-    contx1.textAlign = "center";
-    contx1.textBaseline = "middle";
-    let nWidth = contx1.canvas.width / 2;
-    var count = 0;
-
-
-    contx3.font = '15px Arial';
-    contx3.fillStyle = "white";
-    contx3.textAlign = "center";
-    contx3.textBaseline = "middle";
-
-
-    var myArray = [5, 'F', 7, 'D', 8, 'A', 1, 5, 9, 3, 'B', 4, 7, 'B', 8];
-    var originalArray = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25];
-    colOneList[0] = myArray.toString();
-    colTwoList[0] = myArray.toString();
-    insertionSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25]);
-    colThreeList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
-    //
-    quickSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25]);
-    colFourList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
 
     function convertToDecimal(ArrToDecimal) {
         for (var index in ArrToDecimal) {
@@ -212,10 +263,7 @@
     }
 
 
-    convertToDecimal(myArray);
-    mergeSort(myArray);
-    evenOddSort(myArray);
-    printLists();
+
 
 
     function ringAround(arr, reverse) {
@@ -225,15 +273,18 @@
 
     }
 
-    console.log(myArray);
-    console.log(ringAround(myArray, true));
+    // console.log(myArray);
+    // console.log(ringAround(myArray, true));
+    // console.log(mergeSort(myArray));
 
     function mergeSort(unsortedArray) {
-
-
+        console.log("running mergesort");
         // No need to sort the array if the array only has one element or empty
         if (unsortedArray.length <= 1) {
+            console.log("finished!");
             return unsortedArray;
+        }else{
+            console.log("not finished yet!");
         }
 
 
@@ -246,16 +297,18 @@
 
 
         // Using recursion to combine the left and right
-        return merge(
-            mergeSort(left), mergeSort(right)
-        );
+        //this is where we have to pause
+
+        //this used to be like
+        // return merge(mergsort(left), mergesort(right));
+              merge(
+                left, right
+            );
+
     }
 
     // Merge the two arrays: left and right
     function merge(left, right) {
-        // count++;
-        // contx1.fillText(left + " - " + right, nWidth, 30*count);
-
         let resultArray = [], leftIndex = 0, rightIndex = 0;
 
         // We will add values into the resultArray in order
@@ -270,22 +323,24 @@
         }
 
         var printArray = resultArray.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
-        // count++;
-        // contx1.fillText(" " + left + " " + " " + right, nWidth, 30*count);
-        // contx1.fillText(printArray, nWidth, 30*count);
         convertBackToHex(printArray);
         colOneList.push(printArray.toString());
 
         //Before we move to the next step, wait for the other programs
 
-
-        return resultArray
+        isMergeSortFinished = true;
+        mergeArray = resultArray
             .concat(left.slice(leftIndex))
             .concat(right.slice(rightIndex));
+        colOneList = mergeArray; //i changed the code so that colOneList now gets set to the array after the last
+        //modification
+
     }
 
 
+    //also i think this function is hella wrong so i need to watch videos to fix it
     function evenOddSort(inputArray) {
+        console.log("running goldsort");
         var count3 = 0;
         var evens = [];
         var odds = [];
@@ -296,11 +351,13 @@
             } else {
                 odds.push(inputArray[i]);
             }
-            // count3++;
-            // contx3.fillText(result + "   "  +    evens + " : " + odds, nWidth, 30*count3);
             convertBackToHex(evens);
             convertBackToHex(odds);
-            colTwoList.push((evens + "  ".repeat(6) + odds).toString());
+            // colTwoList.push((evens + "  ".repeat(6) + odds).toString());
+            // goldsArray = evens + odds;
+            isGoldSortFinished = true;
+            //I removed the code i had here cause it broke my program when i had it and idont know how to fix it lmaoooooo
+            // colTwoList = goldsArray;
             convertToDecimal(evens);
             convertToDecimal(odds);
         }

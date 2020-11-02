@@ -62,31 +62,14 @@
         <canvas class="canvasItem" id="fourth"></canvas>
     </div>
 </div>
-<!--<div class="row">-->
-<!--    <div class="column"></div>-->
-<!--    <div class="column"></div>-->
-<!--</div>-->
-<!--<canvas height="738" id="grid" width="738"></canvas>-->
+
 
 </body>
 
 
 <!--<script src="../files/animator.js"></script>-->
 
-<!--<script>-->
-<!--    let canvas = document.getElementById("grid");-->
-<!--    let context = canvas.getContext("2d");-->
-<!--    let center = 369;-->
-<!--    let moves = 1000;-->
-<!--    let begState = 0;-->
-<!--    let begDirection = 0; // North-->
-<!--    let colors = ['black', 'red', 'yellow', 'blue', 'green'];-->
-<!--    draw_grid(context, 41, 41, 'white');-->
 
-
-<!--    // drawTriangleNorth(context, center, center);-->
-<!--    // rotate(context, begState, begDirection, center, center, colors, moves);-->
-<!--</script>-->
 <script>
 
     var colOneList = [];
@@ -128,37 +111,10 @@
 
     }
 
-    // var drawGrid = function (w, h, id) {
-    // var canvas = document.getElementById(id);
-    // canvas.attr({width: cw, height: ch}).appendTo('body');
-    // var canvas = $('<canvas/>').attr({width: cw, height: ch}).appendTo('body');
-    // var ctx = canvas.getContext('2d');
-    // ctx.strokeStyle = "white";
-    // ctx.lineWidth = 5;
-    //
-    // ctx.canvas.width = canvas.width;
-    // ctx.canvas.height = canvas.height;
-    //
-    //
-    // var columns = 1,
-    //     rows    = 42;
-    // var bw = canvas.width/columns;
-    // var bh = canvas.height/rows;
-    // var p = 0;
-
-
     //draws a grid
     function draw_grid(ctxz, min, maj, stroke_, name) {
-        // ctxz.save();
-        //setting the grid size
         let width = ctxz.canvas.width;
         let height = ctxz.canvas.height;
-
-        // var scale = window.devicePixelRatio;
-        //
-        //
-        // ctxz.width = Math.floor(ctxz.canvas.width * scale);
-        // ctxz.height = Math.floor(ctxz.canvas.width * scale);
 
 
         let textX = width / 2;
@@ -184,8 +140,7 @@
             ctxz.lineWidth = 2;
             ctxz.stroke();
         }
-        // ctxz.restore();
-        // ctxz.moveTo(0, 0);
+
         ctxz.font = '15px Arial';
         ctxz.fillStyle = "white";
         ctxz.textAlign = "center";
@@ -199,9 +154,6 @@
     canvasOne.width = parent.offsetWidth;
     canvasOne.height = parent.offsetHeight;
     let contx1 = canvasOne.getContext("2d");
-    // canvasOne.getContext('2d').scale(1,1);
-    // var scale = window.devicePixelRatio;
-    // contx1.scale(scale, scale);
 
     let canvasTwo = document.getElementById("second");
     var parentTwo = document.getElementById("diveTwo");
@@ -213,19 +165,14 @@
     var parentThree = document.getElementById("diveThree");
     canvasThree.width = parentThree.offsetWidth;
     canvasThree.height = parentThree.offsetHeight;
-    // canvasThree.width = parent.offsetWidth;
-    // canvasThree.height = parent.offsetHeight;
     let contx3 = canvasThree.getContext("2d");
 
     let canvasFour = document.getElementById("fourth");
     var parentFour = document.getElementById("diveFour");
     canvasFour.width = parentFour.offsetWidth;
     canvasFour.height = parentFour.offsetHeight;
-    // canvasFour.width = parent.offsetWidth;
-    // canvasFour.height = parent.offsetHeight;
     let contx4 = canvasFour.getContext("2d");
-    // var width = canvasOne.getAttribute('height');
-    // var height = canvasOne.getAttribute('width');
+
     draw_grid(contx1, 1, 42, 'white', "MergeSort");
     draw_grid(contx2, 1, 42, 'white', "Insertion Sort");
     draw_grid(contx3, 1, 42, 'white', "Gold Sort");
@@ -245,20 +192,12 @@
     contx3.fillStyle = "white";
     contx3.textAlign = "center";
     contx3.textBaseline = "middle";
-    // let nWidth =  contx3.canvas.width / 2;
-    // var count = 0;
 
 
-    // 5F7D8A1593B47B8
     var myArray = [5, 'F', 7, 'D', 8, 'A', 1, 5, 9, 3, 'B', 4, 7, 'B', 8];
     var originalArray = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25];
-
-    // colOneList.push([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString());
     colOneList[0] = myArray.toString();
-    // colTwoList.push([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString());
     colTwoList[0] = myArray.toString();
-
-    //
     insertionSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25]);
     colThreeList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
     //
@@ -278,19 +217,16 @@
     evenOddSort(myArray);
     printLists();
 
-    // contx1.fillText(mergeSort([5, 6, 4, 3, 10, 8, 1]), nWidth, 30);
 
-    // drawGrid(canvasOne.width, canvasOne.height, 'first');
-    // drawGrid(canvasOne.width, canvasOne.height, 'second');
-    // drawGrid(canvasOne.width, canvasOne.height, 'third');
-    // drawGrid(canvasOne.width, canvasOne.height, 'fourth');
+    function ringAround(arr, reverse) {
+        if (reverse) arr.unshift(arr.pop());
+        else arr.push(arr.shift());
+        return arr;
 
+    }
 
-    // contx1.fillText([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString(), nWidth, 21);
-
-
-    //converting from hex to decimal
-
+    console.log(myArray);
+    console.log(ringAround(myArray, true));
 
     function mergeSort(unsortedArray) {
 
@@ -339,8 +275,10 @@
         // contx1.fillText(printArray, nWidth, 30*count);
         convertBackToHex(printArray);
         colOneList.push(printArray.toString());
-        //
-        // We need to concat to the resultArray because there will be one element left over after the while loop
+
+        //Before we move to the next step, wait for the other programs
+
+
         return resultArray
             .concat(left.slice(leftIndex))
             .concat(right.slice(rightIndex));

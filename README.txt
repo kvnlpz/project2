@@ -29,3 +29,5 @@ Issues
 	1. After finding more resources and information, Gold's Poresort may not be completely finished.
 	2. When going over the project, we realized we missed a step and had to revert back to a prior save file.
 	3. Issues came across trying to get the ring implemented, the array would not cycle the last element. 
+	4. Could not figure out what to display for the Quick sort algorithm. 
+	5. Output was too large for insertion, ran out of time to fix.

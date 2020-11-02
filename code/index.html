@@ -199,37 +199,13 @@
     colOneList[0] = myArray.toString();
     colTwoList[0] = myArray.toString();
     colThreeList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
-    insertionSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25]);
-    quickSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25]);
+
     colFourList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
 
 
-    function callFunctions(){
-        convertToDecimal(myArray);
-        let list = myArray;
-        let newArray = ringAround(myArray, true);
-        // let newArray = ringAround(temp, true);
-        console.log("inside callfunctions()");
-        console.log("newArray: "+newArray);
-        console.log("ring: "+ ringAround(newArray, true));
-        console.log("list: " + list);
-        if(isEqual(myArray, myArray)){
-            console.log("NOT EQUAL");
-        }
-        else {
-            console.log("equal");
-        }
-        while(newArray !== list){
-            console.log("inside while loop");
-            newArray = ringAround(list, true);
-            mergeSort(newArray);
-            evenOddSort(newArray);
-            printLists();
-
-        }
 
 
-    }
+
 
     function convertToDecimal(ArrToDecimal) {
         for (var index in ArrToDecimal) {
@@ -254,13 +230,33 @@
     console.log(myArray);
     console.log(ringAround(myArray, true));
 
-    callFunctions();
+    // callFunctions();
+
+    for(var iterations = 0; iterations < 15; iterations++){
+        myArray = ringAround(myArray, true);
+        insertionSort(myArray);
+        quickSort(myArray);
+        // convertToDecimal(myArray);
+        mergeSort(myArray);
+        evenOddSort(myArray);
+        printLists();
+        contxt1.clearRect(0, 0, contxt1.canvas.width, contxt1.canvas.height);
+        contxt2.clearRect(0, 0, contxt2.canvas.width, contxt2.canvas.height);
+        contxt3.clearRect(0, 0, contxt3.canvas.width, contxt3.canvas.height);
+        contxt4.clearRect(0, 0, contxt4.canvas.width, contxt4.canvas.height);
+
+        draw_grid(contx1, 1, 42, 'white', "MergeSort");
+        draw_grid(contx2, 1, 42, 'white', "Insertion Sort");
+        draw_grid(contx3, 1, 42, 'white', "Gold Sort");
+        draw_grid(contx4, 1, 42, 'white', "QuickSort");
+    }
+
 
 
     function mergeSort(unsortedArray) {
 
 
-        // No need to sort the array if the array only has one element or empty
+        // No need to sort the array if the array only has one element or less
         if (unsortedArray.length <= 1) {
             return unsortedArray;
         }

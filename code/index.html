@@ -48,28 +48,45 @@
 <!--</script>-->
 <h1>Project 2</h1>
 
-<div class="row" id="columnContainer">
-    <div class="column" id="diveOne">
-        <canvas class="canvasItem" id="first"></canvas>
+<div id="columnContainer" class="row">
+    <div id="diveOne" class="column">
+        <canvas id="first" class="canvasItem"></canvas>
     </div>
-    <div class="column" id="diveTwo">
-        <canvas class="canvasItem" id="second"></canvas>
+    <div id="diveTwo" class="column">
+        <canvas id="second" class="canvasItem"></canvas>
     </div>
-    <div class="column" id="diveThree">
-        <canvas class="canvasItem" id="third"></canvas>
+    <div id="diveThree" class="column">
+        <canvas id="third" class="canvasItem"></canvas>
     </div>
-    <div class="column" id="diveFour">
-        <canvas class="canvasItem" id="fourth"></canvas>
+    <div id="diveFour" class="column">
+        <canvas id="fourth" class="canvasItem"></canvas>
     </div>
 </div>
-
+<!--<div class="row">-->
+<!--    <div class="column"></div>-->
+<!--    <div class="column"></div>-->
+<!--</div>-->
+<!--<canvas height="738" id="grid" width="738"></canvas>-->
 
 </body>
 
 
 <!--<script src="../files/animator.js"></script>-->
 
+<!--<script>-->
+<!--    let canvas = document.getElementById("grid");-->
+<!--    let context = canvas.getContext("2d");-->
+<!--    let center = 369;-->
+<!--    let moves = 1000;-->
+<!--    let begState = 0;-->
+<!--    let begDirection = 0; // North-->
+<!--    let colors = ['black', 'red', 'yellow', 'blue', 'green'];-->
+<!--    draw_grid(context, 41, 41, 'white');-->
 
+
+<!--    // drawTriangleNorth(context, center, center);-->
+<!--    // rotate(context, begState, begDirection, center, center, colors, moves);-->
+<!--</script>-->
 <script>
 
     var colOneList = [];
@@ -78,43 +95,63 @@
     var colFourList = [];
 
 
-    function convertBackToHex(arrayToConvert) {
-        for (var item in arrayToConvert) {
-            hexValue = arrayToConvert[item].toString(16);
-            arrayToConvert[item] = hexValue;
-        }
-    }
 
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    async function printLists() {
+    async function printLists(){
         var heightIncrement = contx1.canvas.height / 42;
         var yvalue = 10;
-        for (var x = 0; x < 42; x++) {
+        for(var x = 0; x < 42; x++){
             yvalue += heightIncrement;
-            if (colOneList[x] != null) {
-                contx1.fillText(colOneList[x], nWidth, yvalue);
-            }
-            if (colTwoList[x] != null) {
-                contx3.fillText(colTwoList[x], nWidth, yvalue);
-            }
-            if (colThreeList[x] != null) {
-                contx2.fillText(colThreeList[x], nWidth, yvalue);
-            }
-            if (colFourList[x] != null) {
-                contx4.fillText(colFourList[x], nWidth, yvalue);
-            }
-            await sleep(500);
+                if(colOneList[x] != null){
+                    contx1.fillText(colOneList[x], nWidth, yvalue);
+                }
+                if(colTwoList[x] != null){
+                    contx3.fillText(colTwoList[x], nWidth, yvalue);
+                }
+                if(colThreeList[x] != null){
+                    contx2.fillText(colThreeList[x], nWidth, yvalue);
+                }
+                if(colFourList[x] != null){
+                    contx4.fillText(colFourList[x], nWidth, yvalue);
+                }
+                await sleep(500);
         }
 
     }
+    // var drawGrid = function (w, h, id) {
+    // var canvas = document.getElementById(id);
+    // canvas.attr({width: cw, height: ch}).appendTo('body');
+    // var canvas = $('<canvas/>').attr({width: cw, height: ch}).appendTo('body');
+    // var ctx = canvas.getContext('2d');
+    // ctx.strokeStyle = "white";
+    // ctx.lineWidth = 5;
+    //
+    // ctx.canvas.width = canvas.width;
+    // ctx.canvas.height = canvas.height;
+    //
+    //
+    // var columns = 1,
+    //     rows    = 42;
+    // var bw = canvas.width/columns;
+    // var bh = canvas.height/rows;
+    // var p = 0;
+
 
     //draws a grid
     function draw_grid(ctxz, min, maj, stroke_, name) {
+        // ctxz.save();
+        //setting the grid size
         let width = ctxz.canvas.width;
         let height = ctxz.canvas.height;
+
+        // var scale = window.devicePixelRatio;
+        //
+        //
+        // ctxz.width = Math.floor(ctxz.canvas.width * scale);
+        // ctxz.height = Math.floor(ctxz.canvas.width * scale);
 
 
         let textX = width / 2;
@@ -140,7 +177,8 @@
             ctxz.lineWidth = 2;
             ctxz.stroke();
         }
-
+        // ctxz.restore();
+        // ctxz.moveTo(0, 0);
         ctxz.font = '15px Arial';
         ctxz.fillStyle = "white";
         ctxz.textAlign = "center";
@@ -154,6 +192,9 @@
     canvasOne.width = parent.offsetWidth;
     canvasOne.height = parent.offsetHeight;
     let contx1 = canvasOne.getContext("2d");
+    // canvasOne.getContext('2d').scale(1,1);
+    // var scale = window.devicePixelRatio;
+    // contx1.scale(scale, scale);
 
     let canvasTwo = document.getElementById("second");
     var parentTwo = document.getElementById("diveTwo");
@@ -165,14 +206,19 @@
     var parentThree = document.getElementById("diveThree");
     canvasThree.width = parentThree.offsetWidth;
     canvasThree.height = parentThree.offsetHeight;
+    // canvasThree.width = parent.offsetWidth;
+    // canvasThree.height = parent.offsetHeight;
     let contx3 = canvasThree.getContext("2d");
 
     let canvasFour = document.getElementById("fourth");
     var parentFour = document.getElementById("diveFour");
     canvasFour.width = parentFour.offsetWidth;
     canvasFour.height = parentFour.offsetHeight;
+    // canvasFour.width = parent.offsetWidth;
+    // canvasFour.height = parent.offsetHeight;
     let contx4 = canvasFour.getContext("2d");
-
+    // var width = canvasOne.getAttribute('height');
+    // var height = canvasOne.getAttribute('width');
     draw_grid(contx1, 1, 42, 'white', "MergeSort");
     draw_grid(contx2, 1, 42, 'white', "Insertion Sort");
     draw_grid(contx3, 1, 42, 'white', "Gold Sort");
@@ -184,79 +230,48 @@
     contx1.fillStyle = "white";
     contx1.textAlign = "center";
     contx1.textBaseline = "middle";
-    let nWidth = contx1.canvas.width / 2;
+    let nWidth =  contx1.canvas.width / 2;
     var count = 0;
+
 
 
     contx3.font = '15px Arial';
     contx3.fillStyle = "white";
     contx3.textAlign = "center";
     contx3.textBaseline = "middle";
+    // let nWidth =  contx3.canvas.width / 2;
+    // var count = 0;
 
 
-    var myArray = [5, 'F', 7, 'D', 8, 'A', 1, 5, 9, 3, 'B', 4, 7, 'B', 8];
-    var originalArray = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25];
-    colOneList[0] = myArray.toString();
-    colTwoList[0] = myArray.toString();
+    mergeSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25]);
+    // colOneList.push([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString());
+    colOneList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
+    evenOddSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25]);
+    // colTwoList.push([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString());
+    colTwoList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
+    //
+    insertionSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25]);
     colThreeList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
-
+    //
+    quickSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25]);
     colFourList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
 
+    printLists();
+
+    // contx1.fillText(mergeSort([5, 6, 4, 3, 10, 8, 1]), nWidth, 30);
+
+    // drawGrid(canvasOne.width, canvasOne.height, 'first');
+    // drawGrid(canvasOne.width, canvasOne.height, 'second');
+    // drawGrid(canvasOne.width, canvasOne.height, 'third');
+    // drawGrid(canvasOne.width, canvasOne.height, 'fourth');
 
 
+    // contx1.fillText([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString(), nWidth, 21);
+
+    function mergeSort (unsortedArray) {
 
 
-
-    function convertToDecimal(ArrToDecimal) {
-        for (var index in ArrToDecimal) {
-            var newNumber = parseInt(ArrToDecimal[index].toString(), 16);
-            ArrToDecimal[index] = newNumber;
-        }
-    }
-
-
-
-
-
-
-
-    function ringAround(arr, reverse) {
-        if (reverse) arr.unshift(arr.pop());
-        else arr.push(arr.shift());
-        return arr;
-
-    }
-
-    console.log(myArray);
-    console.log(ringAround(myArray, true));
-
-    // callFunctions();
-
-    for(var iterations = 0; iterations < 15; iterations++){
-        myArray = ringAround(myArray, true);
-        insertionSort(myArray);
-        quickSort(myArray);
-        // convertToDecimal(myArray);
-        mergeSort(myArray);
-        evenOddSort(myArray);
-        printLists();
-        contxt1.clearRect(0, 0, contxt1.canvas.width, contxt1.canvas.height);
-        contxt2.clearRect(0, 0, contxt2.canvas.width, contxt2.canvas.height);
-        contxt3.clearRect(0, 0, contxt3.canvas.width, contxt3.canvas.height);
-        contxt4.clearRect(0, 0, contxt4.canvas.width, contxt4.canvas.height);
-
-        draw_grid(contx1, 1, 42, 'white', "MergeSort");
-        draw_grid(contx2, 1, 42, 'white', "Insertion Sort");
-        draw_grid(contx3, 1, 42, 'white', "Gold Sort");
-        draw_grid(contx4, 1, 42, 'white', "QuickSort");
-    }
-
-
-
-    function mergeSort(unsortedArray) {
-
-
-        // No need to sort the array if the array only has one element or less
+        // No need to sort the array if the array only has one element or empty
         if (unsortedArray.length <= 1) {
             return unsortedArray;
         }
@@ -277,13 +292,13 @@
     }
 
     // Merge the two arrays: left and right
-    function merge(left, right) {
+    function merge (left, right) {
         // count++;
         // contx1.fillText(left + " - " + right, nWidth, 30*count);
 
         let resultArray = [], leftIndex = 0, rightIndex = 0;
 
-        // We will add values into the resultArray in order
+        // We will concatenate values into the resultArray in order
         while (leftIndex < left.length && rightIndex < right.length) {
             if (left[leftIndex] < right[rightIndex]) {
                 resultArray.push(left[leftIndex]);
@@ -298,49 +313,45 @@
         // count++;
         // contx1.fillText(" " + left + " " + " " + right, nWidth, 30*count);
         // contx1.fillText(printArray, nWidth, 30*count);
-        convertBackToHex(printArray);
         colOneList.push(printArray.toString());
-
-        //Before we move to the next step, wait for the other programs
-
-
+        //
+        // We need to concat to the resultArray because there will be one element left over after the while loop
         return resultArray
             .concat(left.slice(leftIndex))
             .concat(right.slice(rightIndex));
     }
 
 
-    function evenOddSort(inputArray) {
+
+
+
+    function evenOddSort(inputArray){
         var count3 = 0;
         var evens = [];
         var odds = [];
         var result = [];
-        for (var i in inputArray) {
-            if (inputArray[i] % 2 == 0) {
+        for(var i in inputArray){
+            if(inputArray[i]%2 == 0){
                 evens.push(inputArray[i]);
-            } else {
+            }
+            else {
                 odds.push(inputArray[i]);
             }
             // count3++;
             // contx3.fillText(result + "   "  +    evens + " : " + odds, nWidth, 30*count3);
-            convertBackToHex(evens);
-            convertBackToHex(odds);
-            colTwoList.push((evens + "  ".repeat(6) + odds).toString());
-            convertToDecimal(evens);
-            convertToDecimal(odds);
+            colTwoList.push((evens + " : " + odds).toString());
         }
     }
+    function insertionSort(insertionArray){
+        for(let i = 1; i < insertionArray.length; i++){
 
-
-    function insertionSort(insertionArray) {
-        for (let i = 1; i < insertionArray.length; i++) {
-
-            for (let j = i; j > 0; j--) {
+            for(let j = i; j> 0; j--){
                 if (insertionArray[j] < insertionArray[j - 1]) {
                     const temp = insertionArray[j];
                     insertionArray[j] = insertionArray[j - 1];
                     insertionArray[j - 1] = temp;
-                } else
+                }
+                else
                     break;
 
                 colThreeList.push((insertionArray).toString());
@@ -351,8 +362,8 @@
 
     }
 
-    function quickSort(quickArray) {
-        if (quickArray.length <= 1) {
+    function quickSort(quickArray){
+        if(quickArray.length  <= 1){
             return quickArray;
         }
 
@@ -361,42 +372,27 @@
         const right = [];
 
         for (let i = 0; i < quickArray.length - 1; i++) {
-            if (quickArray[i] < pivot) {
+            if(quickArray[i] < pivot){
                 left.push(quickArray[i])
-            } else {
+            }
+            else{
                 right.push(quickArray[i]);
             }
-
+            colFourList.push((quickArray).toString());
         }
 
-        if (left.length > 0 && right.length > 0) {
-            return [...quickSort(left), pivot, ...quickSort(right)];
-        } else if (left.length > 0) {
+        if (left.length > 0 && right.length > 0){
+            return[...quickSort(left), pivot, ...quickSort(right)];
+        }
+        else if (left.length > 0){
             return [...quickSort(left), pivot];
-        } else {
+        }
+        else{
             return [pivot, ...quickSort(right)];
 
         }
 
     }
 
-
-
-
-    function isEqual(a, b)
-    {
-
-        // if length is not equal
-        if(a.length!=b.length)
-            return false;
-        else
-        {
-            // comapring each element of array
-            for(var i=0;i<a.length;i++)
-                if(a[i]!=b[i])
-                    return false;
-            return true;
-        }
-    }
-    </script>
+</script>
 </html>

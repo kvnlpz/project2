@@ -22,3 +22,10 @@ Installation & Running
 	
 External Requirements
 	There should be no external requirements that we are aware of at this time. The project should work with any web browser. 
+	
+	
+Issues
+	Some issues we came across when builiding
+	1. After finding more resources and information, Gold's Poresort may not be completely finished.
+	2. When going over the project, we realized we missed a step and had to revert back to a prior save file.
+	3. Issues came across trying to get the ring implemented, the array would not cycle the last element. 

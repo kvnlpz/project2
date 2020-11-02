@@ -105,19 +105,19 @@
         var yvalue = 10;
         for(var x = 0; x < 42; x++){
             yvalue += heightIncrement;
-                if(colOneList[x] != null){
-                    contx1.fillText(colOneList[x], nWidth, yvalue);
-                }
-                if(colTwoList[x] != null){
-                    contx3.fillText(colTwoList[x], nWidth, yvalue);
-                }
-                if(colThreeList[x] != null){
-                    contx2.fillText(colThreeList[x], nWidth, yvalue);
-                }
-                if(colFourList[x] != null){
-                    contx4.fillText(colFourList[x], nWidth, yvalue);
-                }
-                await sleep(500);
+            if(colOneList[x] != null){
+                contx1.fillText(colOneList[x], nWidth, yvalue);
+            }
+            if(colTwoList[x] != null){
+                contx3.fillText(colTwoList[x], nWidth, yvalue);
+            }
+            if(colThreeList[x] != null){
+                contx2.fillText(colThreeList[x], nWidth, yvalue);
+            }
+            if(colFourList[x] != null){
+                contx4.fillText(colFourList[x], nWidth, yvalue);
+            }
+            await sleep(500);
         }
 
     }
@@ -239,14 +239,14 @@
     contx3.fillStyle = "white";
     contx3.textAlign = "center";
     contx3.textBaseline = "middle";
-    // let nWidth =  contx3.canvas.width / 2;
-    // var count = 0;
 
+    var myArray = [5, 'F', 7, 'D', 8, 'A', 1, 5, 9, 3, 'B', 4, 7, 'B', 8];
 
-    mergeSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25]);
+    convertToDecimal(myArray);
+    mergeSort(myArray);
     // colOneList.push([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString());
     colOneList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
-    evenOddSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25]);
+    evenOddSort(myArray);
     // colTwoList.push([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString());
     colTwoList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
     //
@@ -258,15 +258,23 @@
 
     printLists();
 
-    // contx1.fillText(mergeSort([5, 6, 4, 3, 10, 8, 1]), nWidth, 30);
+    function convertBackToHex(arrayToConvert) {
+        for (var item in arrayToConvert) {
+            hexValue = arrayToConvert[item].toString(16);
+            arrayToConvert[item] = hexValue;
+        }
+    }
 
-    // drawGrid(canvasOne.width, canvasOne.height, 'first');
-    // drawGrid(canvasOne.width, canvasOne.height, 'second');
-    // drawGrid(canvasOne.width, canvasOne.height, 'third');
-    // drawGrid(canvasOne.width, canvasOne.height, 'fourth');
 
 
-    // contx1.fillText([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString(), nWidth, 21);
+
+    function convertToDecimal(ArrToDecimal) {
+        for (var index in ArrToDecimal) {
+            var newNumber = parseInt(ArrToDecimal[index].toString(), 16);
+            ArrToDecimal[index] = newNumber;
+        }
+    }
+
 
     function mergeSort (unsortedArray) {
 
@@ -277,24 +285,23 @@
         }
 
 
-        // In order to divide the array in half, we need to figure out the middle
+        //get the middle of the array
         const middle = Math.floor(unsortedArray.length / 2);
 
-        // This is where we will be dividing the array into left and right
+
+        //create left and right arrays
         const left = unsortedArray.slice(0, middle);
         const right = unsortedArray.slice(middle);
 
 
-        // Using recursion to combine the left and right
+        //we call it recursiveley
         return merge(
             mergeSort(left), mergeSort(right)
         );
     }
 
-    // Merge the two arrays: left and right
+    // Merge the two arrays
     function merge (left, right) {
-        // count++;
-        // contx1.fillText(left + " - " + right, nWidth, 30*count);
 
         let resultArray = [], leftIndex = 0, rightIndex = 0;
 
@@ -302,19 +309,16 @@
         while (leftIndex < left.length && rightIndex < right.length) {
             if (left[leftIndex] < right[rightIndex]) {
                 resultArray.push(left[leftIndex]);
-                leftIndex++; // move left array cursor
+                leftIndex++; // move left array point
             } else {
                 resultArray.push(right[rightIndex]);
-                rightIndex++; // move right array cursor
+                rightIndex++; // move right array point
             }
         }
 
         var printArray = resultArray.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
-        // count++;
-        // contx1.fillText(" " + left + " " + " " + right, nWidth, 30*count);
-        // contx1.fillText(printArray, nWidth, 30*count);
-        colOneList.push(printArray.toString());
-        //
+        convertBackToHex(printArray);
+        colOneList.push(printArray);
         // We need to concat to the resultArray because there will be one element left over after the while loop
         return resultArray
             .concat(left.slice(leftIndex))
@@ -324,7 +328,8 @@
 
 
 
-
+    //so apparently gold pore sort was another way of saying evenOddSort
+    //code inspired from lesson on GeeksforGeeks.com C++ oddEvenSort
     function evenOddSort(inputArray){
         var count3 = 0;
         var evens = [];
@@ -339,7 +344,11 @@
             }
             // count3++;
             // contx3.fillText(result + "   "  +    evens + " : " + odds, nWidth, 30*count3);
-            colTwoList.push((evens + " : " + odds).toString());
+            convertBackToHex(evens);
+            convertBackToHex(odds);
+            colTwoList.push((evens + "  ".repeat(6) + odds).toString());
+            convertToDecimal(evens);
+            convertToDecimal(odds);
         }
     }
     function insertionSort(insertionArray){

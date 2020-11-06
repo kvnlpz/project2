@@ -20,32 +20,6 @@
 
 <body>
 
-<!--<script>-->
-<!--    // Box width-->
-<!--    var bw = 400;-->
-<!--    // Box height-->
-<!--    var bh = 400;-->
-<!--    // Padding-->
-<!--    var p = 10;-->
-
-<!--    var canvas = document.getElementById("canvas");-->
-<!--    var context = canvas.getContext("2d");-->
-<!--    function drawBoard(){-->
-<!--        for (var x = 0; x <= bw; x += 40) {-->
-<!--            context.moveTo(0.5 + x + p, p);-->
-<!--            context.lineTo(0.5 + x + p, bh + p);-->
-<!--        }-->
-
-<!--        for (var x = 0; x <= bh; x += 40) {-->
-<!--            context.moveTo(p, 0.5 + x + p);-->
-<!--            context.lineTo(bw + p, 0.5 + x + p);-->
-<!--        }-->
-<!--        context.strokeStyle = "white";-->
-<!--        context.stroke();-->
-<!--    }-->
-
-<!--    drawBoard();-->
-<!--</script>-->
 <h1>Project 2</h1>
 
 <div id="columnContainer" class="row">
@@ -62,44 +36,161 @@
         <canvas id="fourth" class="canvasItem"></canvas>
     </div>
 </div>
-<!--<div class="row">-->
-<!--    <div class="column"></div>-->
-<!--    <div class="column"></div>-->
-<!--</div>-->
-<!--<canvas height="738" id="grid" width="738"></canvas>-->
-
 </body>
 
 
-<!--<script src="../files/animator.js"></script>-->
-
-<!--<script>-->
-<!--    let canvas = document.getElementById("grid");-->
-<!--    let context = canvas.getContext("2d");-->
-<!--    let center = 369;-->
-<!--    let moves = 1000;-->
-<!--    let begState = 0;-->
-<!--    let begDirection = 0; // North-->
-<!--    let colors = ['black', 'red', 'yellow', 'blue', 'green'];-->
-<!--    draw_grid(context, 41, 41, 'white');-->
-
-
-<!--    // drawTriangleNorth(context, center, center);-->
-<!--    // rotate(context, begState, begDirection, center, center, colors, moves);-->
-<!--</script>-->
 <script>
 
     var colOneList = [];
     var colTwoList = [];
     var colThreeList = [];
     var colFourList = [];
+    let canvasOne = document.getElementById("first");
+    var parent = document.getElementById("diveOne");
+    canvasOne.width = parent.offsetWidth;
+    canvasOne.height = parent.offsetHeight;
+    let contx1 = canvasOne.getContext("2d");
+
+    let canvasTwo = document.getElementById("second");
+    var parentTwo = document.getElementById("diveTwo");
+    canvasTwo.width = parentTwo.offsetWidth;
+    canvasTwo.height = parentTwo.offsetHeight;
+    let contx2 = canvasTwo.getContext("2d");
+
+    let canvasThree = document.getElementById("third");
+    var parentThree = document.getElementById("diveThree");
+    canvasThree.width = parentThree.offsetWidth;
+    canvasThree.height = parentThree.offsetHeight;
+    let contx3 = canvasThree.getContext("2d");
+
+    let canvasFour = document.getElementById("fourth");
+    var parentFour = document.getElementById("diveFour");
+    canvasFour.width = parentFour.offsetWidth;
+    canvasFour.height = parentFour.offsetHeight;
+    let contx4 = canvasFour.getContext("2d");
+    draw_grid(contx1, 1, 42, 'white', "MergeSort");
+    draw_grid(contx2, 1, 42, 'white', "Insertion Sort");
+    draw_grid(contx3, 1, 42, 'white', "Gold Sort");
+    draw_grid(contx4, 1, 42, 'white', "QuickSort");
+
+    //canvas 1
+    contx1.font = '15px Arial';
+    contx1.fillStyle = "white";
+    contx1.textAlign = "center";
+    contx1.textBaseline = "middle";
+    contx3.font = '15px Arial';
+    contx3.fillStyle = "white";
+    contx3.textAlign = "center";
+    contx3.textBaseline = "middle";
+    let nWidth =  contx1.canvas.width / 2;
+
+    var myArray =     [5, 'F', 7, 'D', 8, 'A', 1, 5, 9, 3, 'B', 4, 7, 'B', 8];
+    var secondArray = [5, 'F', 7, 'D', 8, 'A', 1, 5, 9, 3, 'B', 4, 7, 'B', 8];
+    // arrayComparer(myArray,secondArray);
+    var testArray =     [5, 'F', 7, 'D', 8, 'A', 1, 5, 9, 3, 'B', 4, 7, 'B', 8];
+
+    convertToDecimal(testArray);
+    convertToDecimal(secondArray);
+    // myArray = ringAround(testArray);
+    ringAround(testArray);
+    console.log("myarray: " + testArray);
+    console.log("seconda: " + secondArray);
+
+    var heightIncrement = contx1.canvas.height / 42;
+    var yvalue = 10;
 
 
+    colOneList[0] = testArray.toString();
+    colTwoList[0] = testArray.toString();
+    colThreeList[0] = testArray.toString();
+    colFourList[0] = testArray.toString();
+
+
+    // convertToDecimal(testArray);
+
+
+    run();
+    async function run(){
+        while(true){
+            if(!arrayComparer(testArray, secondArray)){
+                contx1.clearRect(0,0, contx1.canvas.width, contx1.canvas.height);
+                draw_grid(contx1, 1, 42, 'white', "MergeSort");
+                console.log("while says not true");
+                console.log(testArray.toString());
+                mergeSort(testArray); //mergesort
+                // printLists(); //print the list
+                for(var pep = 0; pep < colOneList.length; pep++){
+                    yvalue+= heightIncrement;
+                    console.log("inside for");
+                    console.log("PEP: "  +colOneList[pep]);
+                    contx1.fillText(colOneList[pep], nWidth, yvalue);
+                    await sleep(10);
+                }
+                yvalue = 10;
+
+                //now we need to clear the list
+                // while (colOneList.length) { colOneList.pop(); }
+
+                testArray =  ringAround(testArray); //shift array stuff
+                while (colOneList.length) { colOneList.pop(); }
+                colOneList[0] = testArray;
+                console.log("isdie col: "  +colOneList.toString());
+
+
+
+            }else if(arrayComparer(testArray, secondArray)){
+
+                console.log("all the way around time to break;");
+                break;
+            }
+
+            // contx1.clearRect(0,0, contx1.canvas.width, contx1.canvas.height);
+            // draw_grid(contx1, 1, 42, 'white', "MergeSort");
+            // mergeSort(testArray);
+            // quickSort(testArray);
+            // insertionSort(testArray);
+            // evenOddSort(testArray);
+            // printLists();
+        }
+    }
+
+    // myArray.forEach(function (x){
+    //     console.log(x);
+    //     if()
+    // });
+
+
+
+    //We want to call the ring function multiple times,
+    //how to compare two arrays?
+    //
+    // mergeSort(myArray);
+    // evenOddSort(myArray);
+    // insertionSort(myArray);
+    // quickSort(myArray);
+    // printLists();
+
+    function arrayComparer(arr1, arr2){
+        var equal = false;
+        if(arr1.length === arr2.length){
+            for(var x = 0; x<=arr1.length; x++){
+                if(arr1[x] === arr2[x]){
+                    console.log("equals: " + arr1[x] + " : " + arr2[x]);
+                    equal = true;
+                }
+                else {
+                    equal = false;
+                    break;
+                    // console.log("not equals: " + arr1[x] + " : " + arr2[x]);
+                }
+            }
+            return equal;
+        }
+    }
 
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
-
     async function printLists(){
         var heightIncrement = contx1.canvas.height / 42;
         var yvalue = 10;
@@ -119,47 +210,18 @@
             }
             await sleep(500);
         }
+        // while (colOneList.length) { await colOneList.pop(); }
 
     }
-    // var drawGrid = function (w, h, id) {
-    // var canvas = document.getElementById(id);
-    // canvas.attr({width: cw, height: ch}).appendTo('body');
-    // var canvas = $('<canvas/>').attr({width: cw, height: ch}).appendTo('body');
-    // var ctx = canvas.getContext('2d');
-    // ctx.strokeStyle = "white";
-    // ctx.lineWidth = 5;
-    //
-    // ctx.canvas.width = canvas.width;
-    // ctx.canvas.height = canvas.height;
-    //
-    //
-    // var columns = 1,
-    //     rows    = 42;
-    // var bw = canvas.width/columns;
-    // var bh = canvas.height/rows;
-    // var p = 0;
-
-
     //draws a grid
     function draw_grid(ctxz, min, maj, stroke_, name) {
-        // ctxz.save();
         //setting the grid size
         let width = ctxz.canvas.width;
         let height = ctxz.canvas.height;
 
-        // var scale = window.devicePixelRatio;
-        //
-        //
-        // ctxz.width = Math.floor(ctxz.canvas.width * scale);
-        // ctxz.height = Math.floor(ctxz.canvas.width * scale);
-
 
         let textX = width / 2;
-        let texty = height / 2;
-        let n = name;
 
-        // var width = canvasOne.getAttribute('width');
-        // var height = canvasOne.getAttribute('height');
 
         for (let ix = 0; ix < width; ix += width / min) {
             ctxz.beginPath();
@@ -167,18 +229,15 @@
             ctxz.lineTo(ix, height);
             ctxz.strokeStyle = stroke_;
             ctxz.lineWidth = 2;
-            ctxz.stroke();
         }
         for (let iy = 0; iy < height; iy += height / maj) {
+
             ctxz.beginPath();
             ctxz.moveTo(0, iy);
             ctxz.lineTo(width, iy);
             ctxz.strokeStyle = stroke_;
             ctxz.lineWidth = 2;
-            ctxz.stroke();
         }
-        // ctxz.restore();
-        // ctxz.moveTo(0, 0);
         ctxz.font = '15px Arial';
         ctxz.fillStyle = "white";
         ctxz.textAlign = "center";
@@ -186,96 +245,19 @@
         ctxz.fillText(name, textX, 10);
 
     }
-
-    let canvasOne = document.getElementById("first");
-    var parent = document.getElementById("diveOne");
-    canvasOne.width = parent.offsetWidth;
-    canvasOne.height = parent.offsetHeight;
-    let contx1 = canvasOne.getContext("2d");
-    // canvasOne.getContext('2d').scale(1,1);
-    // var scale = window.devicePixelRatio;
-    // contx1.scale(scale, scale);
-
-    let canvasTwo = document.getElementById("second");
-    var parentTwo = document.getElementById("diveTwo");
-    canvasTwo.width = parentTwo.offsetWidth;
-    canvasTwo.height = parentTwo.offsetHeight;
-    let contx2 = canvasTwo.getContext("2d");
-
-    let canvasThree = document.getElementById("third");
-    var parentThree = document.getElementById("diveThree");
-    canvasThree.width = parentThree.offsetWidth;
-    canvasThree.height = parentThree.offsetHeight;
-    // canvasThree.width = parent.offsetWidth;
-    // canvasThree.height = parent.offsetHeight;
-    let contx3 = canvasThree.getContext("2d");
-
-    let canvasFour = document.getElementById("fourth");
-    var parentFour = document.getElementById("diveFour");
-    canvasFour.width = parentFour.offsetWidth;
-    canvasFour.height = parentFour.offsetHeight;
-    // canvasFour.width = parent.offsetWidth;
-    // canvasFour.height = parent.offsetHeight;
-    let contx4 = canvasFour.getContext("2d");
-    // var width = canvasOne.getAttribute('height');
-    // var height = canvasOne.getAttribute('width');
-    draw_grid(contx1, 1, 42, 'white', "MergeSort");
-    draw_grid(contx2, 1, 42, 'white', "Insertion Sort");
-    draw_grid(contx3, 1, 42, 'white', "Gold Sort");
-    draw_grid(contx4, 1, 42, 'white', "QuickSort");
-
-
-    //canvas 1
-    contx1.font = '15px Arial';
-    contx1.fillStyle = "white";
-    contx1.textAlign = "center";
-    contx1.textBaseline = "middle";
-    let nWidth =  contx1.canvas.width / 2;
-    var count = 0;
-
-
-
-    contx3.font = '15px Arial';
-    contx3.fillStyle = "white";
-    contx3.textAlign = "center";
-    contx3.textBaseline = "middle";
-
-    var myArray = [5, 'F', 7, 'D', 8, 'A', 1, 5, 9, 3, 'B', 4, 7, 'B', 8];
-
-    convertToDecimal(myArray);
-    mergeSort(myArray);
-    // colOneList.push([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString());
-    colOneList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
-    evenOddSort(myArray);
-    // colTwoList.push([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString());
-    colTwoList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
-    //
-    insertionSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25]);
-    colThreeList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
-    //
-    quickSort([5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25]);
-    colFourList[0] = [5, 6, 4, 3, 10, 8, 1, 12, 14, 7, 20, 13, 25].toString();
-
-    printLists();
-
     function convertBackToHex(arrayToConvert) {
         for (var item in arrayToConvert) {
             hexValue = arrayToConvert[item].toString(16);
             arrayToConvert[item] = hexValue;
         }
     }
-
-
-
-
+    //inspired by stackOverflow, geeksforgeeks, and tutorialpoint
     function convertToDecimal(ArrToDecimal) {
         for (var index in ArrToDecimal) {
             var newNumber = parseInt(ArrToDecimal[index].toString(), 16);
             ArrToDecimal[index] = newNumber;
         }
     }
-
-
     function mergeSort (unsortedArray) {
 
 
@@ -299,7 +281,6 @@
             mergeSort(left), mergeSort(right)
         );
     }
-
     // Merge the two arrays
     function merge (left, right) {
 
@@ -319,15 +300,11 @@
         var printArray = resultArray.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
         convertBackToHex(printArray);
         colOneList.push(printArray);
-        // We need to concat to the resultArray because there will be one element left over after the while loop
+        // We need to combine both  to the resultArray cause there'll be one element left over after the while loop
         return resultArray
             .concat(left.slice(leftIndex))
             .concat(right.slice(rightIndex));
     }
-
-
-
-
     //so apparently gold pore sort was another way of saying evenOddSort
     //code inspired from lesson on GeeksforGeeks.com C++ oddEvenSort
     function evenOddSort(inputArray){
@@ -342,8 +319,6 @@
             else {
                 odds.push(inputArray[i]);
             }
-            // count3++;
-            // contx3.fillText(result + "   "  +    evens + " : " + odds, nWidth, 30*count3);
             convertBackToHex(evens);
             convertBackToHex(odds);
             colTwoList.push((evens + "  ".repeat(6) + odds).toString());
@@ -362,8 +337,9 @@
                 }
                 else
                     break;
-
+                convertBackToHex(insertionArray);
                 colThreeList.push((insertionArray).toString());
+                convertToDecimal(insertionArray);
 
             }
 
@@ -400,6 +376,13 @@
             return [pivot, ...quickSort(right)];
 
         }
+
+    }
+    //ring function inspired from stackoverflow and geeksforgeeks
+    function ringAround(arr, reverse) {
+        if (reverse) arr.unshift(arr.pop());
+        else arr.push(arr.shift());
+        return arr;
 
     }
 

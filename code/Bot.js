@@ -1,10 +1,10 @@
 class Bot{
-    constructor(startingPosition) {
-        this.position = startingPosition;
+    constructor(startingBalloon) {
+        this.currentBalloon = startingBalloon;
     }
 
-    getPosition(){
-        return this.position;
+    getBalloon(){
+        return this.currentBalloon;
     }
 
     moveForward(){
